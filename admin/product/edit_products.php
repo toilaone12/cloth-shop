@@ -106,7 +106,7 @@ if (isset($_GET['ID'])) {
                                 <label>Ảnh sản phẩm</label>
                                 <input type="file" name="prd_image" onchange="preview();" />
                                 <div>
-                                    <img src="<?php echo $NewProcduct['images'] ?>" alt="" id="prd_image_id" width="300" height="400" />
+                                    <img src="./images/<?php echo $NewProcduct['images'] ?>" alt="" id="prd_image_id" width="300" height="400" />
                                 </div>
                                 </class>
                         </div>

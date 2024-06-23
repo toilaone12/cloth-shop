@@ -1,7 +1,7 @@
 <?php
 
 if ($connect) {
-    $sqlGetUsers = "SELECT * FROM users";
+    $sqlGetUsers = "SELECT * FROM users ORDER BY user_level DESC";
     $queryGetUsers = mysqLi_query($connect, $sqlGetUsers);
 }
 ?>
@@ -14,7 +14,7 @@ if (isset($_GET['page'])) { // kiểm tra sự tồn tại của danh mục
 }
 $rowsPerPage = 5;
 $PerRow = $page * $rowsPerPage - $rowsPerPage;
-$sqlGetUsers = "SELECT * FROM users ORDER BY ID ASC LIMIT $PerRow,$rowsPerPage";
+$sqlGetUsers = "SELECT * FROM users ORDER BY user_level DESC, ID DESC LIMIT $PerRow,$rowsPerPage";
 $queryGetUsers = mysqli_query($connect, $sqlGetUsers);
 // để xây dựng thanh phân trang thì tính tổng số danh mục trong csdl chia cho số danh mục trên 1 trang có lẻ thì làm tròn á bây -->
 // biến tổng số bản ghi sau đó thực thi câu truy vấn lấy toàn bộ trong danh mục sản phẩm

@@ -152,7 +152,7 @@ if (isset($_POST['sbm'])) {
                                 <label>Quyền</label>
                                 <select name="user_level" class="form-control">
                                     <option value="1">Admin</option>
-                                    <option values="0">Member</option>
+                                    <!-- <option values="0">Member</option> -->
 
                                 </select>
                             </div>

@@ -79,8 +79,10 @@ if(isset($_GET['page_layout']) && $_GET['page_layout'] == 'logout'){
                                 <?php
                                     if(isset($_COOKIE['customer_login']) && $_COOKIE['customer_login']){
                                         $customer = json_decode($_COOKIE['customer_login'],true);
+                                        $user = $connect->query("SELECT * FROM users WHERE ID = ".$customer['ID']." LIMIT 1");
+                                        $one = $user->fetch_assoc();
                                 ?>
-                                <a href="?page_layout=info" class="text-light"><?=$customer['Name']?></a>
+                                <a href="?page_layout=info" class="text-light"><?=$one['Name']?></a>
                                 <a href="?page_layout=logout" class="text-light">Đăng xuất</a>
                                 <?php
                                     }else{

@@ -71,11 +71,6 @@ $result = $connect->query($listCate);
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script>
     $(function(){
-        var getParameter = function(name) {
-            var url = window.location.href;
-            url += name;
-            return url;
-        };
         const notyf = new Notyf({
             duration: 5000,
             ripple: true,
@@ -159,12 +154,12 @@ $result = $connect->query($listCate);
             })
         })
         //sx san pham
-        // $('.choose-sx').on('change', function(e){
-        //     e.preventDefault();
-        //     let val = $(this).val();
-        //     location.href = getParameter(`&${val}=1`);
-        //     // console.log();
-        // })
+        $('.choose-sx').on('change', function(e){
+            e.preventDefault();
+            let link = $(this).val();
+            location.href = link;
+            // console.log();
+        })
     });
 </script>
 </body>

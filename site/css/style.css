@@ -3381,6 +3381,15 @@ ol {
 	font-weight: 800;
 }
 
+.bg-bronde {
+	background-color: #f3f2ee !important;
+}
+
+.disabled {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1200px) {

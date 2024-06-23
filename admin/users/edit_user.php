@@ -63,7 +63,7 @@ if (isset($_GET['ID'])) {
                                 <select value="<?php echo $NewUser['user_level'] ?>" name="user_level"
                                     class="form-control">
                                     <option value='1'>Admin</option>
-                                    <option value='0' selected>Member</option>
+                                    <!-- <option value='0' selected>Member</option> -->
                                 </select>
                             </div>
                             <button type="submit" name="sbm" class="btn btn-primary">Cập nhật</button>

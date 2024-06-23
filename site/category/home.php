@@ -14,6 +14,8 @@
             ];
         }
         if($category->num_rows){
+            $page = isset($_GET['page']) && $_GET['page'] ? intval($_GET['page']) : 1;
+            $start = ($page * 3) - 3;
             $one = $category->fetch_assoc();
             $cons = "SELECT * FROM product WHERE category_ID = ".$id;
             if(isset($_GET['keyword']) && $_GET['keyword']){
@@ -28,13 +30,14 @@
                 $min = intval($_GET['min']);
                 $cons .= " and price >= ".$min;
             }
-            if(isset($_GET['desc']) && $_GET['desc']){
+            if(isset($_GET['sortBy']) && $_GET['sortBy'] == 'desc'){
                 $cons .= " ORDER BY price DESC";
             }
-            if(isset($_GET['asc']) && $_GET['asc']){
+            if(isset($_GET['sortBy']) && $_GET['sortBy'] == 'asc'){
                 $cons .= " ORDER BY price ASC";
             }
-            $products = $connect->query($cons);
+            $products = $connect->query($cons." LIMIT $start,3");
+            $countProduct = ceil($connect->query($cons)->num_rows / 3);
         }else{
             header("Location: index.php");
         }
@@ -153,8 +156,8 @@
                             <div class="shop__product__option__right">
                                 <p>Sắp xếp theo:</p>
                                 <select class="choose-sx">
-                                    <option value="asc">Giá từ thấp đến cao</option>
-                                    <option value="desc">Giá từ cao đến thấp</option>
+                                    <option value="<?=getLink(['sortBy' => 'asc'])?>">Giá từ thấp đến cao</option>
+                                    <option value="<?=getLink(['sortBy' => 'desc'])?>">Giá từ cao đến thấp</option>
                                 </select>
                             </div>
                         </div>
@@ -183,11 +186,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__pagination">
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <span>...</span>
-                            <a href="#">21</a>
+                            <?php
+                                for($i = 1; $i <= intval($countProduct); $i++){
+                            ?>
+                            <a class="<?=$page == $i ? 'active disabled' : '' ?>" href="<?=getLink(['page' => $i])?>"><?=$i;?></a>
+                            <?php 
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>

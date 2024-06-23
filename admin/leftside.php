@@ -48,7 +48,7 @@
                  <a href="index.php?page_layout=admin"><svg class="glyph stroked dashboard-dial">
                          <use xlink:href="#stroked-dashboard-dial"></use>
                      </svg>
-                     Dashboard</a>
+                     Trang chủ</a>
              </li>
              <li>
                  <a href="index.php?page_layout=user"><svg class="glyph stroked male user">
@@ -74,13 +74,13 @@
                      </svg>
                      Quản lý đơn hàng</a>
              </li>
-             <li>
+             <!-- <li>
                  <a href="index.php?page_layout=comment"><svg class="glyph stroked two messages">
                          <use xlink:href="#stroked-two-messages" />
                      </svg>
                      Quản lý bình luận</a>
-             </li>
-             <li>
+             </li> -->
+             <!-- <li>
                  <a href="index.php?page_layout=ads"><svg class="glyph stroked chain">
                          <use xlink:href="#stroked-chain" />
                      </svg>
@@ -91,6 +91,6 @@
                          <use xlink:href="#stroked-gear" />
                      </svg>
                      Cấu hình</a>
-             </li>
+             </li> -->
          </ul>
      </div>

@@ -40,6 +40,9 @@ if (isset($_GET['page_layout'])) {
         case 'order': 
             include_once('./page/info.php');
             break;
+        case 'order_detail': 
+            include_once('./order/detail.php');
+            break;
         case 'login': 
             header("Location: login.php");
             break;

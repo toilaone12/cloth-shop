@@ -168,12 +168,12 @@ if (isset($_POST['sbm'])) {
                         <label>Ảnh sản phẩm</label>
                         <?php
                         if (isset($errors['prd_image'])) {
-                            echo    $errors['prd_image'];
+                            echo $errors['prd_image'];
                         }
                         ?>
                         <input type="file" name="prd_image" onchange="preview();" />
                         <div>
-                            <img src="<?php echo $NewProcduct['images'] ?>" alt="" id="prd_image_id" width="300"
+                            <img src="./images/th.jfif" alt="" id="prd_image_id" width="300"
                                 height="400" />
                         </div>
                         <br>
