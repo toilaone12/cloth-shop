@@ -4,10 +4,6 @@ if ($connect) {
     $queryGetOrders = mysqli_query($connect, $sqlGetOrders);
 }
 ?>
-<?php
-$product = mysqli_query($connect, "SELECT product.*, category.name AS 'Name' FROM product JOIN category ON product.ID = category.ID");
-
-?>
 
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -82,25 +78,9 @@ $product = mysqli_query($connect, "SELECT product.*, category.name AS 'Name' FRO
                                     </td>
                                 </tr>
                             <?php
-                                $id++;
                             } ?>
                         </tbody>
                     </table>
-                </div>
-                <div class="panel-footer">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">&raquo;</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>

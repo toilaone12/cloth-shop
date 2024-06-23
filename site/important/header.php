@@ -80,7 +80,7 @@ if(isset($_GET['page_layout']) && $_GET['page_layout'] == 'logout'){
                                     if(isset($_COOKIE['customer_login']) && $_COOKIE['customer_login']){
                                         $customer = json_decode($_COOKIE['customer_login'],true);
                                 ?>
-                                <a class="text-light"><?=$customer['Name']?></a>
+                                <a href="?page_layout=info" class="text-light"><?=$customer['Name']?></a>
                                 <a href="?page_layout=logout" class="text-light">Đăng xuất</a>
                                 <?php
                                     }else{
@@ -112,7 +112,7 @@ if(isset($_GET['page_layout']) && $_GET['page_layout'] == 'logout'){
                                     <?php
                                         while($row = $result->fetch_assoc()){
                                     ?>
-                                    <li><a href="./about.html"><?=$row['Name']?></a></li>
+                                    <li><a href="?page_layout=category&id=<?=$row['ID']?>"><?=$row['Name']?></a></li>
                                     <?php
                                         }
                                     ?>

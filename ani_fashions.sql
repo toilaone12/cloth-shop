@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 22, 2024 lúc 08:28 PM
--- Phiên bản máy phục vụ: 10.4.22-MariaDB
--- Phiên bản PHP: 7.3.33
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th6 23, 2024 lúc 10:36 AM
+-- Phiên bản máy phục vụ: 10.4.27-MariaDB
+-- Phiên bản PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `category` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(50) NOT NULL,
   `IsDeleted` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -56,14 +56,15 @@ INSERT INTO `category` (`ID`, `Name`, `IsDeleted`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `code` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `fullname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `code` varchar(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(11) DEFAULT NULL,
+  `address` text NOT NULL,
   `total` bigint(20) NOT NULL,
-  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `payment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `note` text DEFAULT NULL,
+  `payment` varchar(255) NOT NULL,
   `order_date` date NOT NULL,
   `status` int(11) NOT NULL,
   `IsDeleted` int(1) DEFAULT NULL
@@ -73,10 +74,11 @@ CREATE TABLE `orders` (
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `code`, `fullname`, `email`, `phone`, `address`, `total`, `note`, `payment`, `order_date`, `status`, `IsDeleted`) VALUES
-(10, 'CODE5965', 'kiều đặng bảo sơn', 'baooson3005@gmail.com', '0386278998', 'số nhà b4 khu tập thể viện khoa học nông nghiệp', 46300000, 'can gap', 'Thanh toán khi nhận hàng', '2024-06-22', 0, 0),
-(12, 'CODE6500', 'kiều đặng bảo sơn', 'baooson3005@gmail.com', '0386278998', 'số nhà b4 khu tập thể viện khoa học nông nghiệp', 24300000, 'can gap', 'Thanh toán khi nhận hàng', '2024-06-22', 3, 0),
-(15, 'CODE5361', 'Nguyễn Văn Huy', 'nguyenvanhuy@gmail.com', '03381123333', 'Hà Nội', 104000000, 'Đúng ngày', 'Thanh toán bằng VNPAY', '2024-06-22', 3, 0);
+INSERT INTO `orders` (`id`, `code`, `user_id`, `fullname`, `email`, `phone`, `address`, `total`, `note`, `payment`, `order_date`, `status`, `IsDeleted`) VALUES
+(10, 'CODE5965', 20, 'kiều đặng bảo sơn', 'baooson3005@gmail.com', '0386278998', 'số nhà b4 khu tập thể viện khoa học nông nghiệp', 46300000, 'can gap', 'Thanh toán khi nhận hàng', '2024-06-22', 0, 0),
+(12, 'CODE6500', 20, 'kiều đặng bảo sơn', 'baooson3005@gmail.com', '0386278998', 'số nhà b4 khu tập thể viện khoa học nông nghiệp', 24300000, 'can gap', 'Thanh toán khi nhận hàng', '2024-06-22', 3, 0),
+(15, 'CODE5361', 25, 'Nguyễn Văn Huy', 'nguyenvanhuy@gmail.com', '03381123333', 'Hà Nội', 104000000, 'Đúng ngày', 'Thanh toán bằng VNPAY', '2024-06-22', 3, 0),
+(16, 'CODE8755', 27, 'Kiều Đặng Bảo Sơn', 'baooson3005@gmail.com', '0386722133', 'Hà Nội', 34000000, 'giao hàng đúng ngày', 'Thanh toán bằng VNPAY', '2024-06-23', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -87,9 +89,9 @@ INSERT INTO `orders` (`id`, `code`, `fullname`, `email`, `phone`, `address`, `to
 CREATE TABLE `orders_detail` (
   `id` int(11) NOT NULL,
   `id_order` int(11) NOT NULL,
-  `code` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
-  `image` text COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `code` varchar(11) NOT NULL,
+  `image` text NOT NULL,
+  `name` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
   `price` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -105,7 +107,8 @@ INSERT INTO `orders_detail` (`id`, `id_order`, `code`, `image`, `name`, `quantit
 (5, 12, 'CODE6500', 'gucci7.jpg ', 'NTH00012 ', 1, 12300000),
 (7, 15, 'CODE5361', 'dior8.jpg ', 'NTH00017 ', 2, 17000000),
 (8, 15, 'CODE5361', 'gucci3.jpg ', 'NTH00011 ', 3, 12000000),
-(9, 15, 'CODE5361', 'dior4.jpg ', 'NTH00018 ', 1, 34000000);
+(9, 15, 'CODE5361', 'dior4.jpg ', 'NTH00018 ', 1, 34000000),
+(10, 16, 'CODE8755', 'dior8.jpg ', 'NTH00017 ', 2, 17000000);
 
 -- --------------------------------------------------------
 
@@ -115,10 +118,10 @@ INSERT INTO `orders_detail` (`id`, `id_order`, `code`, `image`, `name`, `quantit
 
 CREATE TABLE `product` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(50) NOT NULL,
   `price` int(255) NOT NULL,
-  `Mô tả` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `images` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Mô tả` varchar(255) NOT NULL,
+  `images` varchar(255) DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `category_ID` int(11) DEFAULT NULL,
   `IsDeleted` int(1) DEFAULT 0
@@ -159,6 +162,13 @@ CREATE TABLE `shopping_cart` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `shopping_cart`
+--
+
+INSERT INTO `shopping_cart` (`id`, `quantity`, `product_id`, `user_id`) VALUES
+(21, '1', 35, 27);
+
 -- --------------------------------------------------------
 
 --
@@ -167,10 +177,10 @@ CREATE TABLE `shopping_cart` (
 
 CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `Email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Email` varchar(255) DEFAULT NULL,
   `user_level` int(50) NOT NULL,
-  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -182,7 +192,8 @@ INSERT INTO `users` (`ID`, `Name`, `Email`, `user_level`, `password`) VALUES
 (20, 'Nguyễn Thị Mai ', 'nguyenthimai@gmail.com ', 0, '1608 '),
 (21, 'Nguyễn Thế Vinh ', 'nguyenthevinh@gmail.com ', 0, '1919 '),
 (25, 'Nguyễn Văn Huy ', 'huy@gmail.com ', 0, '1234 '),
-(26, 'Phó Hữu Nghĩa ', 'phohuunghia@gmail.com ', 0, '2005 ');
+(26, 'Phó Hữu Nghĩa ', 'phohuunghia@gmail.com ', 0, '2005 '),
+(27, 'Kiều Đặng Bảo Sơn', 'son@gmail.com', 0, '123');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -238,13 +249,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `orders_detail`
 --
 ALTER TABLE `orders_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
@@ -256,13 +267,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT cho bảng `shopping_cart`
 --
 ALTER TABLE `shopping_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

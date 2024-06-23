@@ -2,6 +2,7 @@
 if(isset($_COOKIE['customer_login']) && $_COOKIE['customer_login']){
     $order = $_SESSION['order'];
     if(isset($order) && $order){
+        $customer_id = $order['id_customer'];
         $code = $order['code'];
         $fullname = $order['fullname'];
         $phone = $order['phone'];
@@ -13,7 +14,8 @@ if(isset($_COOKIE['customer_login']) && $_COOKIE['customer_login']){
         $date = date('Y-m-d');
         $status = 0;
         $isDelete = 0;
-        $insertOrder = $connect->query("INSERT INTO orders VALUES ('','$code','$fullname','$email','$phone','$address',$total,'$note','$payment','$date',$status,$isDelete)");
+        // var_dump($order); die;
+        $insertOrder = $connect->query("INSERT INTO orders (`user_id`,`code`,`fullname`,`email`,`phone`,`address`,`total`,`note`,`payment`,`order_date`,`status`,`isDeleted`) VALUES ($customer_id,'$code','$fullname','$email','$phone','$address',$total,'$note','$payment','$date',$status,$isDelete)");
         if($insertOrder){
             $idOrder = $connect->insert_id;
             $select = $connect->query("SELECT * FROM shopping_cart WHERE user_id = ".$order['id_customer']);
@@ -25,7 +27,7 @@ if(isset($_COOKIE['customer_login']) && $_COOKIE['customer_login']){
                 $name = $rowProduct['Name'];
                 $quantity = $row['quantity'];
                 $price = $rowProduct['price'];
-                $insertDetailOrder = $connect->query("INSERT INTO orders_detail VALUES ('',$idOrder,'$code','$image','$name','$quantity','$price')");
+                $insertDetailOrder = $connect->query("INSERT INTO orders_detail (`id_order`,`code`,`image`,`name`,`quantity`,`price`) VALUES ($idOrder,'$code','$image','$name','$quantity','$price')");
                 if(!$insertDetailOrder){
                     $isCheck = false;
                 }

@@ -15,9 +15,6 @@ $connect = doConnection();
 if (!isset($_SESSION['user_login'])) {
     header("Location:login.php");
 }
-if (!$_SESSION['user_login']['user_level']) {
-    header('Location:/Ani_Fashion/site/?page_layout=index.php');
-}
 
 
 ?>
@@ -51,7 +48,6 @@ if (isset($_GET['page_layout'])) {
         case 'delete_category':
             include_once('./category/delete_category.php');
             break;
-
         case 'user':
             include_once('users/user.php');
             break;
@@ -64,7 +60,6 @@ if (isset($_GET['page_layout'])) {
         case 'delete_user':
             include_once "./users/delete_user.php";
             break;
-
         case 'orders':
             include_once './orders/orders.php';
             break;
@@ -74,7 +69,6 @@ if (isset($_GET['page_layout'])) {
         case 'order_detail':
             include_once "orders/order_detail.php";
             break;
-
         case 'product':
             include_once('product/product.php');
             break;

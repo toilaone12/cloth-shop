@@ -9,14 +9,14 @@ if (is_object($connect)) {
         $id_customer = isset($_POST['id_customer']) && $_POST['id_customer'] ? intval($_POST['id_customer']) : 0;
         $selectCart = $connect->query("SELECT * FROM shopping_cart WHERE product_id = $id AND user_id = $id_customer LIMIT 1");
         if($selectCart->num_rows == 0){
-            $insert = $connect->query("INSERT INTO shopping_cart VALUES ('',$quantity,$id,$id_customer)");
+            $insert = $connect->query("INSERT INTO shopping_cart (`quantity`,`product_id`,`user_id`) VALUES ($quantity,$id,$id_customer)");
             if($insert) {
                 $select = $connect->query("SELECT * FROM shopping_cart WHERE user_id = ".$id_customer);
                 $count = $select->num_rows;
                 echo json_encode(['res' => 'success','text' => "Thêm vào giỏ hàng thành công", 'count' => intval($count)]);
                 exit;
             }else{
-                echo json_encode(['res' => 'error','text' => "Có vấn đề truy vấn", 'count' => '']);
+                echo json_encode(['res' => 'error','text' => "Có vấn đề truy vấn thêm giỏ hàng", 'count' => '']);
                 exit;
             }
         }else{
@@ -29,7 +29,7 @@ if (is_object($connect)) {
                 echo json_encode(['res' => 'success','text' => "Thêm vào giỏ hàng thành công", 'count' => intval($count)]);
                 exit;
             }else{
-                echo json_encode(['res' => 'error','text' => "Có vấn đề truy vấn", 'count' => '']);
+                echo json_encode(['res' => 'error','text' => "Có vấn đề truy vấn cập nhật giỏ hàng", 'count' => '']);
                 exit;
             }
         }

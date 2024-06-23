@@ -16,8 +16,8 @@ if (isset($_GET['page_layout'])) {
         case 'chitiet':
             include_once('./page/chitiet.php');
             break;
-        case 'danhmuc':
-            include_once('page/danhmuc.php');
+        case 'category':
+            include_once('category/home.php');
             break;
         case 'cart':
             include_once('./cart/giohang.php');
@@ -30,6 +30,15 @@ if (isset($_GET['page_layout'])) {
             break;
         case 'handle_order':
             include_once('./order/handle_order.php');
+            break;
+        case 'info': 
+            include_once('./page/info.php');
+            break;
+        case 'password': 
+            include_once('./page/info.php');
+            break;
+        case 'order': 
+            include_once('./page/info.php');
             break;
         case 'login': 
             header("Location: login.php");

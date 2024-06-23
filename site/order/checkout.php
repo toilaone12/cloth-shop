@@ -75,12 +75,12 @@ if(isset($_COOKIE['customer_login']) && $_COOKIE['customer_login']){
                 'data' => $vnp_Url
             );
 
-            if ($code != "") {
-                header("Location: " . $vnp_Url);
-                die();
-            } else {
-                echo json_encode($returnData);
-            }
+            header("Location: " . $vnp_Url);
+            // if ($code != "") {
+            //     die();
+            // } else {
+            //     echo json_encode($returnData);
+            // }
         }else{
             header("Location: index.php?page_layout=handle_order");
         }
